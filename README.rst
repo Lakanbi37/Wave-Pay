@@ -1,29 +1,26 @@
 =====
-Polls
+Wave-Pay
 =====
 
-Polls is a Django app to conduct Web-based polls. For each question,
-visitors can choose between a fixed number of answers.
+
+Wave-Pay is a Python package that seamlessly allow merchants accept payments
+on their Python based web apps.
 
 Detailed documentation is in the "docs" directory.
 
 Quick start
 -----------
 
-1. Add "polls" to your INSTALLED_APPS setting like this::
+1. Install wave-pay::
 
-    INSTALLED_APPS = [
-        ...
-        'polls',
-    ]
+    pip install wave-pay
 
-2. Include the polls URLconf in your project urls.py like this::
+2. It is preferred that you store your API Keys as an environment variable then import Wave gateway instance and instantiate::
 
-    path('polls/', include('polls.urls')),
+    from wave_pay import WaveGateway
+    wave = WaveGateway(secret_key="<YOUR_SECRET_KEY>", public_key="<YOUR_PUBLIC_KEY>")
 
-3. Run ``python manage.py migrate`` to create the polls models.
+3. start using the API::
 
-4. Start the development server and visit http://127.0.0.1:8000/admin/
-   to create a poll (you'll need the Admin app enabled).
+    new_transaction = wave.Card.initiate("<ENCRYPTED_PAYLOAD>")
 
-5. Visit http://127.0.0.1:8000/polls/ to participate in the poll.
